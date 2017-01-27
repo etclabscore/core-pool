@@ -536,14 +536,33 @@ func getUncleReward(uHeight, height int64) *big.Int {
 
 	// Rewards
 	reward := new(big.Int).Set(BlockReward)
-	if headerNumber.Cmp(big.NewInt(1000)) > 0 {
+	if headerNumber.Cmp(big.NewInt(358363)) > 0 {
 		reward = big.NewInt(7e+18)
+		// Year 1
 	}
-	if headerNumber.Cmp(big.NewInt(2000)) > 0 {
+	if headerNumber.Cmp(big.NewInt(716727)) > 0 {
 		reward = big.NewInt(6e+18)
+		// Year 2
 	}
-	if headerNumber.Cmp(big.NewInt(3000)) > 0 {
+	if headerNumber.Cmp(big.NewInt(1075090)) > 0 {
 		reward = big.NewInt(5e+18)
+		// Year 3
+	}
+	if headerNumber.Cmp(big.NewInt(1433454)) > 0 {
+		reward = big.NewInt(4e+18)
+		// Year 4
+	}
+	if headerNumber.Cmp(big.NewInt(1791818)) > 0 {
+		reward = big.NewInt(3e+18)
+		// Year 5
+	}
+	if headerNumber.Cmp(big.NewInt(2150181)) > 0 {
+		reward = big.NewInt(2e+18)
+		// Year 6
+	}
+	if headerNumber.Cmp(big.NewInt(2508545)) > 0 {
+		reward = big.NewInt(1e+18)
+		// Year 7
 	}
 
 	r := new(big.Int)

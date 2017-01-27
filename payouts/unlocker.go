@@ -210,41 +210,34 @@ func (u *BlockUnlocker) handleBlock(block *rpc.GetBlockReply, candidate *storage
 	// Rewards
 	reward := new(big.Int).Set(BlockReward)
 	headerNumber := big.NewInt(candidate.Height)
+
 	if headerNumber.Cmp(big.NewInt(358363)) > 0 {
-		reward = big.NewInt(8e+18)
-		// day 0
-	}
-	if headerNumber.Cmp(big.NewInt(716727)) > 0 {
-		reward = big.NewInt(8e+18)
+		reward = big.NewInt(7e+18)
 		// Year 1
 	}
-	if headerNumber.Cmp(big.NewInt(1075090)) > 0 {
-		reward = big.NewInt(7e+18)
+	if headerNumber.Cmp(big.NewInt(716727)) > 0 {
+		reward = big.NewInt(6e+18)
 		// Year 2
 	}
-	if headerNumber.Cmp(big.NewInt(1433454)) > 0 {
-		reward = big.NewInt(6e+18)
+	if headerNumber.Cmp(big.NewInt(1075090)) > 0 {
+		reward = big.NewInt(5e+18)
 		// Year 3
 	}
-	if headerNumber.Cmp(big.NewInt(1791818)) > 0 {
-		reward = big.NewInt(5e+18)
+	if headerNumber.Cmp(big.NewInt(1433454)) > 0 {
+		reward = big.NewInt(4e+18)
 		// Year 4
 	}
-	if headerNumber.Cmp(big.NewInt(2150181)) > 0 {
-		reward = big.NewInt(4e+18)
+	if headerNumber.Cmp(big.NewInt(1791818)) > 0 {
+		reward = big.NewInt(3e+18)
 		// Year 5
 	}
-	if headerNumber.Cmp(big.NewInt(2508545)) > 0 {
-		reward = big.NewInt(3e+18)
+	if headerNumber.Cmp(big.NewInt(2150181)) > 0 {
+		reward = big.NewInt(2e+18)
 		// Year 6
 	}
-	if headerNumber.Cmp(big.NewInt(2866909)) > 0 {
-		reward = big.NewInt(2e+18)
-		// Year 7
-	}
-	if headerNumber.Cmp(big.NewInt(3225272)) > 0 {
+	if headerNumber.Cmp(big.NewInt(2508545)) > 0 {
 		reward = big.NewInt(1e+18)
-		// Year 8 and beyond
+		// Year 7
 	}
 
 	// Add TX fees
@@ -562,7 +555,7 @@ func getUncleReward(uHeight, height int64) *big.Int {
 	if r.Cmp(big.NewInt(0)) < 0 {
 		// blocks older than the previous block are not rewarded
 		r = big.NewInt(0)
-	}	
+	}
 
 	return r
 }

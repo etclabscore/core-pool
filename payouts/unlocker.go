@@ -238,7 +238,7 @@ func (u *BlockUnlocker) handleBlock(block *rpc.GetBlockReply, candidate *storage
 		reward = big.NewInt(3e+18)
 		// Year 6
 	}
-	if headerNumber.Cmp(big.NewInt(2866909))) > 0 {
+	if headerNumber.Cmp(big.NewInt(2866909)) > 0 {
 		reward = big.NewInt(2e+18)
 		// Year 7
 	}

@@ -34,6 +34,7 @@ var (
 	big2                 = big.NewInt(2)
 	big32                = big.NewInt(32)
 	BlockReward *big.Int = big.NewInt(8e+18)
+
 )
 
 // Donate 10% from pool fees to developers
@@ -111,9 +112,15 @@ func (u *BlockUnlocker) unlockCandidates(candidates []*storage.BlockData) (*Unlo
 		/* Search for a normal block with wrong height here by traversing 16 blocks back and forward.
 		 * Also we are searching for a block that can include this one as uncle.
 		 */
+		if candidate.Height < minDepth {
+		 		orphan = false
+		 		// avoid scanning the first 16 blocks 
+		 		continue
+		 }
 		for i := int64(minDepth * -1); i < minDepth; i++ {
 			height := candidate.Height + i
 			block, err := u.rpc.GetBlockByHeight(height)
+
 			if err != nil {
 				log.Printf("Error while retrieving block %v from node: %v", height, err)
 				return nil, err

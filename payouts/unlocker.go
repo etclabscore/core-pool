@@ -8,7 +8,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/ethereum/go-ethereum/common/math"
+	/*"github.com/ethereum/go-ethereum/common/math"*/
 
 	"github.com/ubiq/open-ethereum-pool/rpc"
 	"github.com/ubiq/open-ethereum-pool/storage"

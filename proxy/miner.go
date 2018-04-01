@@ -1,6 +1,7 @@
 package proxy
 
 import (
+	"fmt"
 	"log"
 	"math/big"
 	"strconv"
@@ -20,7 +21,7 @@ var (
 	hasher                *etchash.Etchash = nil
 )
 
-func (s *ProxyServer) processShare(login, id, ip string, t *BlockTemplate, params []string, stratum bool) (bool, bool) {
+func (s *ProxyServer) processShare(login, id, ip string, t *BlockTemplate, params []string, stratum bool) (bool, bool, error) {
 	if hasher == nil {
 		if s.config.Network == "classic" {
 			hasher = etchash.New(&ecip1099FBlockClassic, nil)
@@ -33,7 +34,7 @@ func (s *ProxyServer) processShare(login, id, ip string, t *BlockTemplate, param
 		} else {
 			// unknown network
 			log.Printf("Unknown network configuration %s", s.config.Network)
-			return false, false
+			return false, false, nil
 		}
 	}
 	nonceHex := params[0]
@@ -57,7 +58,7 @@ func (s *ProxyServer) processShare(login, id, ip string, t *BlockTemplate, param
 
 		// check mixDigest
 		if mixDigestTmp.Hex() != mixDigest {
-			return false, false
+			return false, false, nil
 		}
 		result = hashTmp
 	}
@@ -69,13 +70,13 @@ func (s *ProxyServer) processShare(login, id, ip string, t *BlockTemplate, param
 	shareDiffFloat := util.DiffIntToFloat(shareDiffCalc)
 	if shareDiffFloat < 0.0001 {
 		log.Printf("share difficulty too low, %f < %d, from %v@%v", shareDiffFloat, t.Difficulty, login, ip)
-		return false, false
+		return false, false, nil
 	}
 
 	h, ok := t.headers[hashNoNonce]
 	if !ok {
 		log.Printf("Stale share from %v@%v", login, ip)
-		return false, false
+		return false, false, nil
 	}
 
 	if s.config.Proxy.Debug {
@@ -85,7 +86,7 @@ func (s *ProxyServer) processShare(login, id, ip string, t *BlockTemplate, param
 	// check share difficulty
 	shareTarget := new(big.Int).Div(maxUint256, big.NewInt(shareDiff))
 	if result.Big().Cmp(shareTarget) > 0 {
-		return false, false
+		return false, false, nil
 	}
 
 	// check target difficulty
@@ -96,12 +97,12 @@ func (s *ProxyServer) processShare(login, id, ip string, t *BlockTemplate, param
 			log.Printf("Block submission failure at height %v for %v: %v", h.height, t.Header, err)
 		} else if !ok {
 			log.Printf("Block rejected at height %v for %v", h.height, t.Header)
-			return false, false
+			return false, false, nil
 		} else {
 			s.fetchBlockTemplate()
 			exist, err := s.backend.WriteBlock(login, id, params, shareDiff, h.diff.Int64(), h.height, s.hashrateExpiration)
 			if exist {
-				return true, false
+				return true, false, nil
 			}
 			if err != nil {
 				log.Println("Failed to insert block candidate into backend:", err)
@@ -111,13 +112,24 @@ func (s *ProxyServer) processShare(login, id, ip string, t *BlockTemplate, param
 			log.Printf("Block found by miner %v@%v at height %d", login, ip, h.height)
 		}
 	} else {
+		// check hashrate limit
+		if s.config.Proxy.HashLimit > 0 {
+			currentHashrate, _ := s.backend.GetCurrentHashrate(login)
+
+			if s.config.Proxy.HashLimit > 0 && currentHashrate > s.config.Proxy.HashLimit {
+				err := fmt.Errorf("hashLimit exceed: %v(current) > %v(hashLimit)", currentHashrate, s.config.Proxy.HashLimit)
+				log.Println("Failed to insert share data into backend:", err)
+				return false, false, err
+			}
+		}
+
 		exist, err := s.backend.WriteShare(login, id, params, shareDiff, h.height, s.hashrateExpiration)
 		if exist {
-			return true, false
+			return true, false, nil
 		}
 		if err != nil {
 			log.Println("Failed to insert share data into backend:", err)
 		}
 	}
-	return false, true
+	return false, true, nil
 }

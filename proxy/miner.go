@@ -6,11 +6,11 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/ethereum/ethash"
-	"github.com/ethereum/go-ethereum/common"
+	"github.com/ubiq/ubqhash"
+	"github.com/ubiq/go-ubiq/common"
 )
 
-var hasher = ethash.New()
+var hasher = ubqhash.New()
 
 func (s *ProxyServer) processShare(login, id, ip string, t *BlockTemplate, params []string) (bool, bool) {
 	nonceHex := params[0]

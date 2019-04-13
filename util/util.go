@@ -7,12 +7,13 @@ import (
 	"time"
 
 	"github.com/ubiq/go-ubiq/common"
+	"github.com/ubiq/go-ubiq/common/math"
 )
 
-var Ether = common.BigPow(10, 18)
-var Shannon = common.BigPow(10, 9)
+var Ether = math.BigPow(10, 18)
+var Shannon = math.BigPow(10, 9)
 
-var pow256 = common.BigPow(2, 256)
+var pow256 = math.BigPow(2, 256)
 var addressPattern = regexp.MustCompile("^0x[0-9a-fA-F]{40}$")
 var zeroHash = regexp.MustCompile("^0?x?0+$")
 

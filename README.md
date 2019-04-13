@@ -26,8 +26,8 @@
 
 Dependencies:
 
-  * go >= 1.5
-  * geth
+  * go >= 1.9
+  * gubiq
   * redis-server >= 2.8.0
   * nodejs >= 4 LTS
   * nginx

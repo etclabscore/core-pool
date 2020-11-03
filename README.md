@@ -1,14 +1,8 @@
-## Open Source Ethereum Mining Pool
-
-![Miner's stats page](https://15254b2dcaab7f5478ab-24461f391e20b7336331d5789078af53.ssl.cf1.rackcdn.com/ethereum.vanillaforums.com/editor/pe/cf77cki0pjpt.png)
-
-[![Join the chat at https://gitter.im/sammy007/open-ethereum-pool](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/sammy007/open-ethereum-pool?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge) [![Build Status](https://travis-ci.org/sammy007/open-ethereum-pool.svg?branch=develop)](https://travis-ci.org/sammy007/open-ethereum-pool) [![Go Report Card](https://goreportcard.com/badge/github.com/etclabscore/open-ethereum-pool)](https://goreportcard.com/report/github.com/etclabscore/open-ethereum-pool)
-
-[List Of Open Ethereum Pools](https://github.com/etclabscore/open-ethereum-pool/wiki/List-Of-Open-Pools)
+## Open Source Ethereum Classic Mining Pool
 
 ### Features
 
-**This pool is being further developed to provide an easy to use pool for Ethereum miners. This software is functional however an optimised release of the pool is expected soon. Testing and bug submissions are welcome!**
+**This pool is being further developed to provide an easy to use pool for Ethereum Classic miners. This software is functional however an optimised release of the pool is expected soon. Testing and bug submissions are welcome!**
 
 * Support for HTTP and Stratum mining
 * Detailed block stats with luck percentage and full reward
@@ -27,7 +21,7 @@
 Dependencies:
 
   * go >= 1.9
-  * gubiq
+  * core-geth
   * redis-server >= 2.8.0
   * nodejs >= 4 LTS
   * nginx
@@ -106,7 +100,7 @@ otherwise you will get errors on start because of JSON comments.**
   // Set to the number of CPU cores of your server
   "threads": 2,
   // Prefix for keys in redis store
-  "coin": "eth",
+  "coin": "etc",
   // Give unique name to each instance
   "name": "main",
 

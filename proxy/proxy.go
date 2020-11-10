@@ -76,10 +76,6 @@ func NewProxy(cfg *Config, backend *storage.RedisClient) *ProxyServer {
 		go proxy.ListenTCP()
 	}
 
-	if cfg.Proxy.StratumNiceHash.Enabled {
-		go proxy.ListenNiceHashTCP()
-	}
-
 	proxy.fetchBlockTemplate()
 
 	proxy.hashrateExpiration = util.MustParseDuration(cfg.Proxy.HashrateExpiration)

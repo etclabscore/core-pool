@@ -5,8 +5,8 @@ import (
 	"os"
 	"testing"
 
-	"github.com/sammy007/open-ethereum-pool/rpc"
-	"github.com/sammy007/open-ethereum-pool/storage"
+	"github.com/etclabscore/open-etc-pool/rpc"
+	"github.com/etclabscore/open-etc-pool/storage"
 )
 
 func TestMain(m *testing.M) {
@@ -84,6 +84,67 @@ func TestGetUncleReward(t *testing.T) {
 		if expectedRewards[i] != rewards[i] {
 			t.Errorf("Incorrect uncle reward for %v, expected %v vs %v", i, expectedRewards[i], reward)
 		}
+	}
+
+	// Year 1
+	rewardsYear1 := make(map[int64]string)
+	expectedRewardsYear1 := map[int64]string{
+		358363: "3500000000000000000",
+		358364: "0", //previous blocks not rewarded
+		358365: "0",
+		358366: "0",
+		358367: "0",
+		358368: "0",
+	}
+	for i := int64(358363); i < 358363+6; i++ {
+		rewardsYear1[i] = getUncleReward(358363, i+1).String()
+	}
+	for i, reward := range rewardsYear1 {
+		if expectedRewardsYear1[i] != rewardsYear1[i] {
+			t.Errorf("Incorrect uncle reward for %v, expected %v vs %v", i, expectedRewardsYear1[i], reward)
+		}
+	}
+
+	// Year 2
+	expectedRewardsYear2 := "3000000000000000000"
+	rewardsYear2 := getUncleReward(716727, 716727+1).String()
+	if expectedRewardsYear2 != rewardsYear2 {
+		t.Errorf("Incorrect uncle reward, expected %v vs %v", expectedRewardsYear2, rewardsYear2)
+	}
+
+	// Year 3
+	expectedRewardsYear3 := "2500000000000000000"
+	rewardsYear3 := getUncleReward(1075090, 1075090+1).String()
+	if expectedRewardsYear3 != rewardsYear3 {
+		t.Errorf("Incorrect uncle reward, expected %v vs %v", expectedRewardsYear3, rewardsYear3)
+	}
+
+	// Year 4
+	expectedRewardsYear4 := "2000000000000000000"
+	rewardsYear4 := getUncleReward(1433454, 1433454+1).String()
+	if expectedRewardsYear4 != rewardsYear4 {
+		t.Errorf("Incorrect uncle reward, expected %v vs %v", expectedRewardsYear4, rewardsYear4)
+	}
+
+	// Year 5
+	expectedRewardsYear5 := "1500000000000000000"
+	rewardsYear5 := getUncleReward(1791818, 1791818+1).String()
+	if expectedRewardsYear5 != rewardsYear5 {
+		t.Errorf("Incorrect uncle reward, expected %v vs %v", expectedRewardsYear5, rewardsYear5)
+	}
+
+	// Year 6
+	expectedRewardsYear6 := "1000000000000000000"
+	rewardsYear6 := getUncleReward(2150181, 2150181+1).String()
+	if expectedRewardsYear6 != rewardsYear6 {
+		t.Errorf("Incorrect uncle reward, expected %v vs %v", expectedRewardsYear6, rewardsYear6)
+	}
+
+	// Year 7
+	expectedRewardsYear7 := "500000000000000000"
+	rewardsYear7 := getUncleReward(2508545, 2508545+1).String()
+	if expectedRewardsYear7 != rewardsYear7 {
+		t.Errorf("Incorrect uncle reward, expected %v vs %v", expectedRewardsYear7, rewardsYear7)
 	}
 }
 

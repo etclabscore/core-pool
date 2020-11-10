@@ -13,10 +13,10 @@ import (
 
 	"github.com/yvasiyarov/gorelic"
 
-	"github.com/sammy007/open-ethereum-pool/api"
-	"github.com/sammy007/open-ethereum-pool/payouts"
-	"github.com/sammy007/open-ethereum-pool/proxy"
-	"github.com/sammy007/open-ethereum-pool/storage"
+	"github.com/etclabscore/open-etc-pool/api"
+	"github.com/etclabscore/open-etc-pool/payouts"
+	"github.com/etclabscore/open-etc-pool/proxy"
+	"github.com/etclabscore/open-etc-pool/storage"
 )
 
 var cfg proxy.Config

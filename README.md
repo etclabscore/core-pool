@@ -1,5 +1,7 @@
 ## Open Source Ethereum Classic Mining Pool
 
+### WARNING: This code is currently configured for the mordor test network
+
 ### Features
 
 **This pool is being further developed to provide an easy to use pool for Ethereum Classic miners. This software is functional however an optimised release of the pool is expected soon. Testing and bug submissions are welcome!**

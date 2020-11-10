@@ -9,7 +9,7 @@ import (
 	"errors"
 	"time"
 
-	"github.com/etclabscore/open-ethereum-pool/util"
+	"github.com/etclabscore/open-etc-pool/util"
 	"math/rand"
 	"strings"
 )

@@ -9,7 +9,7 @@ import (
 	"net"
 	"time"
 
-	"github.com/etclabscore/open-ethereum-pool/util"
+	"github.com/etclabscore/open-etc-pool/util"
 )
 
 const (
@@ -66,7 +66,6 @@ func (s *ProxyServer) handleTCPClient(cs *Session) error {
 	cs.enc = json.NewEncoder(cs.conn)
 	connbuff := bufio.NewReaderSize(cs.conn, MaxReqSize)
 	s.setDeadline(cs.conn)
-	log.Println("New Session", cs.ip)
 	for {
 		data, isPrefix, err := connbuff.ReadLine()
 		if isPrefix {
@@ -102,7 +101,6 @@ func (s *ProxyServer) handleTCPClient(cs *Session) error {
 
 func (cs *Session) handleTCPMessage(s *ProxyServer, req *StratumReq) error {
 	// Handle RPC methods
-	log.Println("New Message %s", req.Method)
 	switch req.Method {
 	case "eth_submitLogin":
 		var params []string

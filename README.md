@@ -11,36 +11,31 @@
 * Separate stats for workers: can highlight timed-out workers so miners can perform maintenance of rigs
 * JSON-API for stats
 
-#### Proxies
-
-* [Ether-Proxy](https://github.com/sammy007/ether-proxy) HTTP proxy with web interface
-* [Stratum Proxy](https://github.com/Atrides/eth-proxy) for Ethereum
-
 ### Building on Linux
 
 Dependencies:
 
-  * go >= 1.9
+  * go >= 1.13
   * core-geth
   * redis-server >= 2.8.0
   * nodejs >= 4 LTS
   * nginx
 
-**I highly recommend to use Ubuntu 16.04 LTS.**
+**I highly recommend to use Ubuntu 20.04 LTS.**
 
-First install  [go-ethereum](https://github.com/ethereum/go-ethereum/wiki/Installation-Instructions-for-Ubuntu).
+First install  [core-geth](https://github.com/etclabscore/core-geth/releases).
 
 Clone & compile:
 
-    git clone https://github.com/etclabscore/open-ethereum-pool.git
-    cd open-ethereum-pool
+    git clone https://github.com/etclabscore/open-etc-pool.git
+    cd open-etc-pool
     make
 
 Install redis-server.
 
 ### Running Pool
 
-    ./build/bin/open-ethereum-pool config.json
+    ./build/bin/open-etc-pool config.json
 
 You can use Ubuntu upstart - check for sample config in <code>upstart.conf</code>.
 

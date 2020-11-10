@@ -8,7 +8,7 @@ import (
 	"strings"
 	"time"
 
-	/*"github.com/ethereum/go-ethereum/common/math"*/
+	"github.com/ethereum/go-ethereum/common/math"
 
 	"github.com/etclabscore/open-etc-pool/rpc"
 	"github.com/etclabscore/open-etc-pool/storage"
@@ -29,13 +29,10 @@ type UnlockerConfig struct {
 }
 
 const minDepth = 16
+const byzantiumHardForkHeight = 4370000
 
-var (
-	big2                 = big.NewInt(2)
-	big32                = big.NewInt(32)
-	BlockReward *big.Int = big.NewInt(8e+18)
-
-)
+var homesteadReward = math.MustParseBig256("5000000000000000000")
+var byzantiumReward = math.MustParseBig256("3000000000000000000")
 
 // Donate 10% from pool fees to developers
 const donationFee = 10.0
@@ -113,12 +110,17 @@ func (u *BlockUnlocker) unlockCandidates(candidates []*storage.BlockData) (*Unlo
 		 * Also we are searching for a block that can include this one as uncle.
 		 */
 		if candidate.Height < minDepth {
-		 		orphan = false
-		 		// avoid scanning the first 16 blocks 
-		 		continue
-		 }
+			orphan = false
+			// avoid scanning the first 16 blocks
+			continue
+		}
 		for i := int64(minDepth * -1); i < minDepth; i++ {
 			height := candidate.Height + i
+
+			if height < 0 {
+				continue
+			}
+
 			block, err := u.rpc.GetBlockByHeight(height)
 
 			if err != nil {
@@ -213,6 +215,7 @@ func (u *BlockUnlocker) handleBlock(block *rpc.GetBlockReply, candidate *storage
 		return err
 	}
 	candidate.Height = correctHeight
+	reward := getConstReward(candidate.Height)
 
 	// Rewards
 	reward := new(big.Int).Set(BlockReward)
@@ -259,7 +262,7 @@ func (u *BlockUnlocker) handleBlock(block *rpc.GetBlockReply, candidate *storage
 	}
 
 	// Add reward for including uncles
-	uncleReward := new(big.Int).Div(reward, big32)
+	uncleReward := getRewardForUncle(candidate.Height)
 	rewardForUncles := big.NewInt(0).Mul(uncleReward, big.NewInt(int64(len(block.Uncles))))
 	reward.Add(reward, rewardForUncles)
 
@@ -537,53 +540,24 @@ func weiToShannonInt64(wei *big.Rat) int64 {
 	return value
 }
 
+func getConstReward(height int64) *big.Int {
+	if height >= byzantiumHardForkHeight {
+		return new(big.Int).Set(byzantiumReward)
+	}
+	return new(big.Int).Set(homesteadReward)
+}
+
+func getRewardForUncle(height int64) *big.Int {
+	reward := getConstReward(height)
+	return new(big.Int).Div(reward, new(big.Int).SetInt64(32))
+}
+
 func getUncleReward(uHeight, height int64) *big.Int {
-	uncleNumber := big.NewInt(uHeight)
-	headerNumber := big.NewInt(height)
-
-	// Rewards
-	reward := new(big.Int).Set(BlockReward)
-	if headerNumber.Cmp(big.NewInt(358363)) > 0 {
-		reward = big.NewInt(7e+18)
-		// Year 1
-	}
-	if headerNumber.Cmp(big.NewInt(716727)) > 0 {
-		reward = big.NewInt(6e+18)
-		// Year 2
-	}
-	if headerNumber.Cmp(big.NewInt(1075090)) > 0 {
-		reward = big.NewInt(5e+18)
-		// Year 3
-	}
-	if headerNumber.Cmp(big.NewInt(1433454)) > 0 {
-		reward = big.NewInt(4e+18)
-		// Year 4
-	}
-	if headerNumber.Cmp(big.NewInt(1791818)) > 0 {
-		reward = big.NewInt(3e+18)
-		// Year 5
-	}
-	if headerNumber.Cmp(big.NewInt(2150181)) > 0 {
-		reward = big.NewInt(2e+18)
-		// Year 6
-	}
-	if headerNumber.Cmp(big.NewInt(2508545)) > 0 {
-		reward = big.NewInt(1e+18)
-		// Year 7
-	}
-
-	r := new(big.Int)
-
-	r.Add(uncleNumber, big2)
-	r.Sub(r, headerNumber)
-	r.Mul(r, reward)
-	r.Div(r, big2)
-	if r.Cmp(big.NewInt(0)) < 0 {
-		// blocks older than the previous block are not rewarded
-		r = big.NewInt(0)
-	}
-
-	return r
+	reward := getConstReward(height)
+	k := height - uHeight
+	reward.Mul(big.NewInt(8-k), reward)
+	reward.Div(reward, big.NewInt(8))
+	return reward
 }
 
 func (u *BlockUnlocker) getExtraRewardForTx(block *rpc.GetBlockReply) (*big.Int, error) {

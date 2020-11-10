@@ -104,7 +104,7 @@ func (cs *Session) handleTCPMessage(s *ProxyServer, req *StratumReq) error {
 	switch req.Method {
 	case "eth_submitLogin":
 		var params []string
-		err := json.Unmarshal(*req.Params, &params)
+		err := json.Unmarshal(req.Params, &params)
 		if err != nil {
 			log.Println("Malformed stratum request params from", cs.ip)
 			return err
@@ -122,7 +122,7 @@ func (cs *Session) handleTCPMessage(s *ProxyServer, req *StratumReq) error {
 		return cs.sendTCPResult(req.Id, &reply)
 	case "eth_submitWork":
 		var params []string
-		err := json.Unmarshal(*req.Params, &params)
+		err := json.Unmarshal(req.Params, &params)
 		if err != nil {
 			log.Println("Malformed stratum request params from", cs.ip)
 			return err
@@ -140,7 +140,7 @@ func (cs *Session) handleTCPMessage(s *ProxyServer, req *StratumReq) error {
 	}
 }
 
-func (cs *Session) sendTCPResult(id *json.RawMessage, result interface{}) error {
+func (cs *Session) sendTCPResult(id json.RawMessage, result interface{}) error {
 	cs.Lock()
 	defer cs.Unlock()
 
@@ -156,7 +156,7 @@ func (cs *Session) pushNewJob(result interface{}) error {
 	return cs.enc.Encode(&message)
 }
 
-func (cs *Session) sendTCPError(id *json.RawMessage, reply *ErrorReply) error {
+func (cs *Session) sendTCPError(id json.RawMessage, reply *ErrorReply) error {
 	cs.Lock()
 	defer cs.Unlock()
 

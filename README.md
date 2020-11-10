@@ -27,6 +27,7 @@ First install  [core-geth](https://github.com/etclabscore/core-geth/releases).
 
 Clone & compile:
 
+    git config --global http.https://gopkg.in.followRedirects true
     git clone https://github.com/etclabscore/open-etc-pool.git
     cd open-etc-pool
     make
@@ -308,3 +309,7 @@ Made by sammy007. Licensed under GPLv3.
 ### Donations
 
 ETH/ETC: 0xb85150eb365e7df0941f0cf08235f987ba91506a
+
+![](https://cdn.pbrd.co/images/GP5tI1D.png)
+
+Highly appreciated.

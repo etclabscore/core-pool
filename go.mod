@@ -1,4 +1,4 @@
-module github.com/etclabscore/open-ethereum-pool
+module github.com/etclabscore/open-etc-pool
 
 go 1.15
 
@@ -19,4 +19,4 @@ require (
 )
 
 // replace github.com/ethereum/go-ethereum => /home/xocel/go/src/github.com/ethereum/go-ethereum
-// replace github.com/etclabscore/open-ethereum-pool => /home/xocel/go/src/github.com/etclabscore/open-ethereum-pool
+// replace github.com/etclabscore/open-etc-pool => /home/xocel/go/src/github.com/etclabscore/open-etc-pool

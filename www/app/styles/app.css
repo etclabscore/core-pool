@@ -150,24 +150,24 @@ span.logo-gold {
   padding: 0 3px 0 3px;
 }
 
-.ubiq {
+.etc {
   height: 30px;
   width: 30px;
   pointer-events: none;
 }
 
-.ubiq-green > object{
+.etc-green > object{
   float: left;
 }
 
-.ubiq-green > strong{
+.etc-green > strong{
   float: left;
 }
 
 
 /* That time i figured out how to do that thing to scale svg
 
-  .ubiq-green {
+  .etc-green {
   transform: scale(0.4);
   transform: translate(-200px, -50px);
 }
@@ -348,19 +348,19 @@ h4.note {
     border-bottom: 2px solid #5bc0de;
 }
 
-.ul-ubiq {
+.ul-etc {
     color: #61BD81;
     border-bottom: 2px solid #61BD81;
 }
 
 /*-----------------------------------------| Custom Classes |-----------------------------------------*/
 
-.btn-ubiq {
+.btn-etc {
   background-color: #61BD81;
   border-color: #408c5a;
 }
 
-.btn-ubiq:hover {
+.btn-etc:hover {
     color: #fff;
     background-color: #428359;
     border-color: #2c623e;

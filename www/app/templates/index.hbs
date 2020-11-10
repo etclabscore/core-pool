@@ -2,15 +2,18 @@
   <div class="container">
     <div class="row">
       <div class="col-md-5">
-        <h1 style="font-size: 24px">
-          <div class="ubiq-green">
-            <object type="image/svg+xml" data="ubiq-green-small.svg"></object>
-            <strong><span class="logo-2">Pool</span></strong>
-          </div>
-        </h1>
-        <strong>Min. payout threshold: {{config.PayoutThreshold}}</strong>, Payouts are continuos throughout the  day.
-        <br/>
-        <span class="label label-success">PROP</span> Stable and profitable pool with regular payouts.
+        <div class="row">
+          <h1 style="font-size: 24px">
+            <div class="etc-green">
+              <strong><span class="logo-2">ETC Pool</span></strong>
+            </div>
+          </h1>
+        </div>
+        <div class="row" style="padding:15px 5px;">
+          <strong>Min. payout threshold: {{config.PayoutThreshold}}</strong>, Payouts are continuos throughout the  day.
+          <br/>
+          <span class="label label-success">PROP</span> Stable and profitable pool with regular payouts.
+        </div>
       </div>
       <div class="col-md-3 stats">
         <div><i class="fa fa-users"></i> Miners Online: <span id="poolHashrate">{{format-number stats.model.minersTotal}}</span></div>
@@ -34,9 +37,9 @@
   <div class="stats">
     <h4>Your Stats &amp; Payment History</h4>
     <div class="input-group">
-      {{input value=cachedLogin class="form-control" placeholder="Enter Your Ubiq Address"}}
+      {{input value=cachedLogin class="form-control" placeholder="Enter Your Ethereum Classic Address"}}
       <span class="input-group-btn">
-        <button class="btn btn-primary btn-ubiq" type="button" {{action 'lookup' cachedLogin}}>
+        <button class="btn btn-primary btn-etc" type="button" {{action 'lookup' cachedLogin}}>
           <span style="display: inline;"><i class="fa fa-search"></i> Lookup</span>
       </button>
       </span>
@@ -47,23 +50,17 @@
       <h4>
         Warning
       </h4>
-      <p>This is an experimental pool! All the coins mined are in an alpha network (that will be reset eventually) and are for testing purposed only.</p>
+      <p>This is an experimental pool running on the <strong>Mordor</strong> testnet! All mined coins are for testing purposes only.</p>
     </div>
     <div class="jumbotron">
       <div class="container">
         <h3 class="text-center" style="padding: 0 0 5px 0; margin: 0 0 40px 0;"> Instructions</h3>
         <div class="row">
-          <div class="col-md-6">
+          <div class="col-md-12">
             <p class="lead text-center">
               <a href="#/help" class="ul-link">
-                <span class="ul ul-danger">Getwork</span>
-              </a>
-            </p>
-          </div>
-          <div class="col-md-6">
-            <p class="lead text-center">
-              <a href="#/help" class="ul-link">
-                <span class="ul ul-warning">Stratum</span>
+                <span class="ul ul-danger">stratum</span><br />
+                <code>stratum2+tcp://mordor.pool.octano.dev:8008</code>
               </a>
             </p>
           </div>

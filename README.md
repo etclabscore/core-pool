@@ -52,10 +52,20 @@ The frontend is a single-page Ember.js application that polls the pool API to re
 
 Change <code>ApiUrl: '//example.net/'</code> in <code>www/config/environment.js</code> to match your domain name. Also don't forget to adjust other options.
 
+Install deps
+
     npm install -g ember-cli@2.9.1
     npm install -g bower
     npm install
     bower install
+
+Fix intl-format-cache package.
+
+    cp fix/intl-format-cache/src/* node_modules/intl-format-cache/src/
+    cp fix/intl-format-cache/lib/* node_modules/intl-format-cache/lib/
+
+Build.
+
     ./build.sh
 
 Configure nginx to serve API on <code>/api</code> subdirectory.

@@ -10,3 +10,5 @@ The activation block `ecip1099FBlock` is currently set for the **mordor** test n
 You can change this to classic mainnet here: https://github.com/etclabscore/open-etc-pool/blob/master/etchash/etchash.go#L61
 
 Simply uncommet the mainnet line, and comment the mordor line. Rebuild.
+
+Note: the code will smoothly handle the transition, you can update before the fork no problem.

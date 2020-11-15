@@ -1,6 +1,6 @@
 ## Open Source Ethereum Classic Mining Pool
 
-### WARNING: This code is currently configured for the mordor test network
+### WARNING: This code is currently configured for the Ethereum Classic main network
 
 ### Features
 

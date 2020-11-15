@@ -39,6 +39,7 @@ import (
 
 	mmap "github.com/edsrzf/mmap-go"
 	"github.com/ethereum/go-ethereum/common"
+	"github.com/ethereum/go-ethereum/common/hexutil"
 	"github.com/ethereum/go-ethereum/crypto"
 	"github.com/ethereum/go-ethereum/log"
 	"github.com/hashicorp/golang-lru/simplelru"
@@ -113,7 +114,7 @@ func uint32Array2Keccak256(data []uint32) string {
 	// hash with keccak256
 	digest := crypto.Keccak256(bytes)
 	// return hex string
-	return common.ToHex(digest)
+	return hexutil.Encode(digest)
 }
 
 // memoryMap tries to memory map a file of uint32s for read only access.

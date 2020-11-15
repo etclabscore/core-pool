@@ -30,10 +30,10 @@ type UnlockerConfig struct {
 
 const minDepth = 16
 
-const ecip1017FBlock = 0                    // mordor
-var ecip1017EraRounds = big.NewInt(2000000) // mordor
-// const ecip1017FBlock = 5000000    // mainnet
-// const ecip1017EraRounds = big.NewInt(5000000) // mainnet
+// const ecip1017FBlock = 0                    // mordor
+// var ecip1017EraRounds = big.NewInt(2000000) // mordor
+const ecip1017FBlock = 5000000               // mainnet
+var ecip1017EraRounds = big.NewInt(5000000)  // mainnet
 var disinflationRateQuotient = big.NewInt(4) // Disinflation rate quotient for ECIP1017
 var disinflationRateDivisor = big.NewInt(5)  // Disinflation rate divisor for ECIP1017
 var big32 = big.NewInt(32)

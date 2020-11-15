@@ -59,8 +59,8 @@ var (
 )
 
 const (
-	// ecip1099FBlock      uint64 = 11700000 // classic mainnet
-	ecip1099FBlock      uint64 = 2520000 // mordor
+	ecip1099FBlock uint64 = 11700000 // classic mainnet
+	// ecip1099FBlock      uint64 = 2520000 // mordor
 	cacheSizeForTesting uint64 = 1024
 	dagSizeForTesting   uint64 = 1024 * 32
 	cachesInMem                = 2

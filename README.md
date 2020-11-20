@@ -46,6 +46,8 @@ You can use Ubuntu upstart - check for sample config in <code>upstart.conf</code
 
 Install nodejs. I suggest using LTS version >= 4.x from https://github.com/nodesource/distributions or from your Linux distribution or simply install nodejs on Ubuntu Xenial 16.04.
 
+> NOTE: at this point keep your nodejs version <= 10.x.
+
 The frontend is a single-page Ember.js application that polls the pool API to render miner stats.
 
     cd www

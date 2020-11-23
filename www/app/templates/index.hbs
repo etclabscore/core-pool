@@ -46,12 +46,14 @@
     </div>
   </div>
   <div>
-    <div class="bs-callout bs-callout-danger">
-      <h4>
-        Warning
-      </h4>
-      <p>This is an experimental pool running on the <strong>Mordor</strong> testnet! All mined coins are for testing purposes only.</p>
-    </div>
+    {{#if (equals config.Network 'mordor')}}
+      <div class="bs-callout bs-callout-danger">
+        <h4>
+          Warning
+        </h4>
+        <p>This is an experimental pool running on the <strong>Mordor</strong> testnet! All mined coins are for testing purposes only.</p>
+      </div>
+    {{/if}}
     <div class="jumbotron">
       <div class="container">
         <h3 class="text-center" style="padding: 0 0 5px 0; margin: 0 0 40px 0;"> Instructions</h3>

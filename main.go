@@ -33,7 +33,7 @@ func startApi() {
 }
 
 func startBlockUnlocker() {
-	u := payouts.NewBlockUnlocker(&cfg.BlockUnlocker, backend)
+	u := payouts.NewBlockUnlocker(&cfg.BlockUnlocker, backend, &cfg.Network)
 	u.Start()
 }
 

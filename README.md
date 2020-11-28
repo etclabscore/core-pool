@@ -108,7 +108,8 @@ otherwise you will get errors on start because of JSON comments.**
   "coin": "etc",
   // Give unique name to each instance
   "name": "main",
-
+  // mordor OR classic
+  "network": "classic",
   "proxy": {
     "enabled": true,
 
@@ -303,22 +304,11 @@ I recommend this deployment strategy:
 * Don't run payouts and unlocker modules as part of mining node. Create separate configs for both, launch independently and make sure you have a single instance of each module running.
 * If `poolFeeAddress` is not specified all pool profit will remain on coinbase address. If it specified, make sure to periodically send some dust back required for payments.
 
-### Alternative Ethereum Implementations
+### Mordor
 
-This pool is tested to work with [Ethcore's Parity](https://github.com/ethcore/parity). Mining and block unlocking works, but I am not sure about payouts and suggest to run *official* geth node for payments.
+To use this pool on the mordor testnet two settings require changing to "mordor"
 
-### Credits
+network in your config.json (this sets backend (validation,unlocker) to mordor paramaters)
+APP.Network in your www/config/environment.js (this sets the frontend to mordor paramaters)
+rerun ./build.sh
 
-Made by sammy007. Licensed under GPLv3.
-
-#### Contributors
-
-[Alex Leverington](https://github.com/subtly)
-
-### Donations
-
-ETH/ETC: 0xb85150eb365e7df0941f0cf08235f987ba91506a
-
-![](https://cdn.pbrd.co/images/GP5tI1D.png)
-
-Highly appreciated.

@@ -230,9 +230,7 @@ func (u *BlockUnlocker) handleBlock(block *rpc.GetBlockReply, candidate *storage
 	reward := getConstReward(era)
 
 	// Add reward for including uncles
-	var bigHeight = new(big.Int).SetInt64(candidate.Height)
-
-	uncleReward := getRewardForUncle(bigHeight, reward)
+	uncleReward := getRewardForUncle(reward)
 	rewardForUncles := big.NewInt(0).Mul(uncleReward, big.NewInt(int64(len(block.Uncles))))
 	reward.Add(reward, rewardForUncles)
 
@@ -559,8 +557,8 @@ func getConstReward(era *big.Int) *big.Int {
 	return wr
 }
 
-func getRewardForUncle(era *big.Int, blockReward *big.Int) *big.Int {
-	return new(big.Int).Div(GetBlockWinnerRewardByEra(era, blockReward), big32) //return new(big.Int).Div(reward, new(big.Int).SetInt64(32))
+func getRewardForUncle(blockReward *big.Int) *big.Int {
+	return new(big.Int).Div(blockReward, big32) //return new(big.Int).Div(reward, new(big.Int).SetInt64(32))
 }
 
 func getUncleReward(uHeight *big.Int, height *big.Int, era *big.Int, reward *big.Int) *big.Int {
@@ -575,7 +573,7 @@ func getUncleReward(uHeight *big.Int, height *big.Int, era *big.Int, reward *big
 
 		return r
 	}
-	return getRewardForUncle(era, reward)
+	return getRewardForUncle(reward)
 }
 
 func (u *BlockUnlocker) getExtraRewardForTx(block *rpc.GetBlockReply) (*big.Int, error) {

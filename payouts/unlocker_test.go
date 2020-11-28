@@ -116,25 +116,23 @@ func TestGetBlockWinnerRewardByEra(t *testing.T) {
 }
 
 func TestGetRewardForUncle(t *testing.T) {
-	// skip era 0 as it's handled by getUncleReward
-	era := big.NewInt(1)
-	baseReward := big.NewInt(5000000000000000000)
-	uncleReward := getRewardForUncle(era, baseReward)
+	baseReward := big.NewInt(4000000000000000000)
+	uncleReward := getRewardForUncle(baseReward)
 	if uncleReward.Cmp(big.NewInt(125000000000000000)) != 0 {
 		t.Error("Should return uncleReward 125000000000000000", "reward", uncleReward)
 	}
-	era = big.NewInt(2)
-	uncleReward = getRewardForUncle(era, baseReward)
+	baseReward = big.NewInt(3200000000000000000)
+	uncleReward = getRewardForUncle(baseReward)
 	if uncleReward.Cmp(big.NewInt(100000000000000000)) != 0 {
 		t.Error("Should return uncleReward 100000000000000000", "reward", uncleReward)
 	}
-	era = big.NewInt(3)
-	uncleReward = getRewardForUncle(era, baseReward)
+	baseReward = big.NewInt(2560000000000000000)
+	uncleReward = getRewardForUncle(baseReward)
 	if uncleReward.Cmp(big.NewInt(80000000000000000)) != 0 {
 		t.Error("Should return uncleReward 80000000000000000", "reward", uncleReward)
 	}
-	era = big.NewInt(4)
-	uncleReward = getRewardForUncle(era, baseReward)
+	baseReward = big.NewInt(2048000000000000000)
+	uncleReward = getRewardForUncle(baseReward)
 	if uncleReward.Cmp(big.NewInt(64000000000000000)) != 0 {
 		t.Error("Should return uncleReward 64000000000000000", "reward", uncleReward)
 	}

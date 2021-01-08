@@ -12,15 +12,20 @@ import (
 
 var ecip1099FBlockClassic uint64 = 11700000 // classic mainnet
 var ecip1099FBlockMordor uint64 = 2520000   // mordor
+var uip1FEpoch uint64 = 22 // ubiq mainnet
 
 var hasher *etchash.Etchash = nil
 
 func (s *ProxyServer) processShare(login, id, ip string, t *BlockTemplate, params []string) (bool, bool) {
 	if hasher == nil {
 		if s.config.Network == "classic" {
-			hasher = etchash.New(&ecip1099FBlockClassic)
+			hasher = etchash.New(&ecip1099FBlockClassic, nil)
 		} else if s.config.Network == "mordor" {
-			hasher = etchash.New(&ecip1099FBlockMordor)
+			hasher = etchash.New(&ecip1099FBlockMordor, nil)
+		} else if s.config.Network == "ubiq" {
+			hasher = etchash.New(nil, &uip1FEpoch)
+		} else if s.config.Network == "ethereum" || s.config.Network == "ropsten" {
+			hasher = etchash.New(nil, nil)
 		} else {
 			// unknown network
 			log.Printf("Unknown network configuration %s", s.config.Network)

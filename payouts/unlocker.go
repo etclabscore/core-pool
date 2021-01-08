@@ -10,9 +10,9 @@ import (
 
 	"github.com/ethereum/go-ethereum/common/math"
 
-	"github.com/etclabscore/open-etc-pool/rpc"
-	"github.com/etclabscore/open-etc-pool/storage"
-	"github.com/etclabscore/open-etc-pool/util"
+	"github.com/etclabscore/core-pool/rpc"
+	"github.com/etclabscore/core-pool/storage"
+	"github.com/etclabscore/core-pool/util"
 )
 
 type UnlockerConfig struct {

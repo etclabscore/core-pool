@@ -12,10 +12,10 @@ fi
 
 # root="$PWD"
 # ethdir="$workspace/src/github.com/etclabscore"
-# if [ ! -L "$ethdir/open-etc-pool" ]; then
+# if [ ! -L "$ethdir/core-pool" ]; then
 #    mkdir -p "$ethdir"
 #    cd "$ethdir"
-#    ln -s ../../../../../. open-etc-pool
+#    ln -s ../../../../../. core-pool
 #    cd "$root"
 # fi
 
@@ -27,8 +27,8 @@ GOBIN="$PWD/build/bin"
 export GOBIN
 
 # Run the command inside the workspace.
-# cd "$ethdir/open-etc-pool"
-# PWD="$ethdir/open-etc-pool"
+# cd "$ethdir/core-pool"
+# PWD="$ethdir/core-pool"
 
 # Launch the arguments with the configured environment.
 exec "$@"

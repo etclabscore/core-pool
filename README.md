@@ -1,17 +1,14 @@
-## Open Source Ethereum Classic Mining Pool
-
-### WARNING: This code is currently configured for the Ethereum Classic main network
+## core-pool
 
 ### Features
-
-**This pool is being further developed to provide an easy to use pool for Ethereum Classic miners. This software is functional however an optimised release of the pool is expected soon. Testing and bug submissions are welcome!**
 
 * Support for HTTP and Stratum mining
 * Detailed block stats with luck percentage and full reward
 * Failover geth instances: geth high availability built in
-* Modern beautiful Ember.js frontend
 * Separate stats for workers: can highlight timed-out workers so miners can perform maintenance of rigs
 * JSON-API for stats
+* New vue based UI
+* Supports Ethereum Classic, Mordor, Ethereum, Ropsten & Ubiq.
 
 ### Building on Linux
 
@@ -30,43 +27,17 @@ First install  [core-geth](https://github.com/etclabscore/core-geth/releases).
 Clone & compile:
 
     git config --global http.https://gopkg.in.followRedirects true
-    git clone https://github.com/etclabscore/open-etc-pool.git
-    cd open-etc-pool
+    git clone https://github.com/etclabscore/core-pool.git
+    cd core-pool
     make
 
 Install redis-server.
 
 ### Running Pool
 
-    ./build/bin/open-etc-pool config.json
+    ./build/bin/core-pool config.json
 
 You can use Ubuntu upstart - check for sample config in <code>upstart.conf</code>.
-
-### Building Frontend
-
-Install nodejs. I suggest using LTS version >= 4.x from https://github.com/nodesource/distributions or from your Linux distribution or simply install nodejs on Ubuntu Xenial 16.04.
-
-> NOTE: at this point keep your nodejs version <= 10.x.
-
-The frontend is a single-page Ember.js application that polls the pool API to render miner stats.
-
-    cd www
-
-Change <code>ApiUrl: '//example.net/'</code> in <code>www/config/environment.js</code> to match your domain name. Also don't forget to adjust other options.
-
-Install deps
-
-    npm install -g ember-cli@2.9.1
-    npm install -g bower
-    npm install
-    bower install
-
-Build.
-
-    ./build.sh
-
-Configure nginx to serve API on <code>/api</code> subdirectory.
-Configure nginx to serve <code>www/dist</code> as static website.
 
 #### Serving API using nginx
 
@@ -81,17 +52,6 @@ and add this setting after <code>location /</code>:
     location /api {
         proxy_pass http://api;
     }
-
-#### Customization
-
-You can customize the layout using built-in web server with live reload:
-
-    ember server --port 8082 --environment development
-
-**Don't use built-in web server in production**.
-
-Check out <code>www/app/templates</code> directory and edit these templates
-in order to customise the frontend.
 
 ### Configuration
 
@@ -108,7 +68,7 @@ otherwise you will get errors on start because of JSON comments.**
   "coin": "etc",
   // Give unique name to each instance
   "name": "main",
-  // mordor OR classic
+  // mordor, classic, ethereum, ropsten or ubiq
   "network": "classic",
   "proxy": {
     "enabled": true,
@@ -304,11 +264,6 @@ I recommend this deployment strategy:
 * Don't run payouts and unlocker modules as part of mining node. Create separate configs for both, launch independently and make sure you have a single instance of each module running.
 * If `poolFeeAddress` is not specified all pool profit will remain on coinbase address. If it specified, make sure to periodically send some dust back required for payments.
 
-### Mordor
+### frontend
 
-To use this pool on the mordor testnet two settings require changing to "mordor"
-
-network in your config.json (this sets backend (validation,unlocker) to mordor paramaters)
-APP.Network in your www/config/environment.js (this sets the frontend to mordor paramaters)
-rerun ./build.sh
-
+See https://github.com/etclabscore/core-pool-interface

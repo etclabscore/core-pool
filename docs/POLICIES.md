@@ -1,3 +1,8 @@
+---
+hide:
+  - navigation # Hide navigation
+---
+
 # Enforcing Policies
 
 Pool policy server collecting several stats on per IP basis. There are two options: `iptables+ipset` or simple application level bans. Banning is disabled by default.

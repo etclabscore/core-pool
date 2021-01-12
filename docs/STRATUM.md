@@ -1,3 +1,8 @@
+---
+hide:
+  - navigation # Hide navigation
+---
+
 # Stratum Mining Protocol
 
 This is the description of stratum protocol used in this pool.

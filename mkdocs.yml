@@ -1,0 +1,74 @@
+# Project information
+site_name: CorePool Documentation
+site_description: Documentation for CorePool
+site_url: https://etclabscore.github.io/core-pool/
+site_author: CorePool Team
+
+# Repository
+repo_name: etclabscore/core-pool
+repo_url: https://github.com/etclabscore/core-pool
+edit_uri: edit/master/docs/
+
+# Copyright
+copyright: 'Copyright &copy; 2021 etclabscore/core-pool - All rights reserved'
+
+# Configuration
+theme:
+  # https://github.com/squidfunk/mkdocs-material/tree/master/src
+  name: material
+  logo: img/favicon.png
+  favicon: img/favicon.png
+  language: en
+
+  palette:
+    scheme: slate
+    primary: black
+    accent: green
+
+  icon:
+    repo: fontawesome/brands/github
+
+  # Don't include MkDocs' JavaScript
+  include_search_page: false
+
+  features:
+    - navigation.tabs
+    - navigation.tabs.sticky
+    - navigation.expand
+    - navigation.sections
+    # - navigation.instant
+
+use_directory_urls: true
+
+plugins:
+  - search
+  - minify:
+      minify_html: true
+  - git-revision-date-localized:
+      type: timeago
+
+# Extensions
+markdown_extensions:
+  - abbr
+  - admonition
+  - attr_list
+  - codehilite
+  - def_list
+  # - meta
+  - smarty
+  - toc:
+      permalink: true
+  - pymdownx.emoji
+  - pymdownx.superfences
+  - pymdownx.details
+  - pymdownx.magiclink:
+      repo_url_shortener: true
+      repo_url_shorthand: true
+      social_url_shorthand: true
+
+# Page tree
+nav:
+  - Home: index.md
+  - Payouts: PAYOUTS.md
+  - Stratum: STRATUM.md
+  - Policies: POLICIES.md

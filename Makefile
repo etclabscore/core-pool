@@ -2,7 +2,7 @@
 # with Go source code. If you know what GOPATH is then you probably
 # don't need to bother with make.
 
-.PHONY: all test clean
+.PHONY: all test clean mkdocs-serve
 
 GOBIN = ./build/bin
 GOGET = env GO111MODULE=on go get
@@ -17,3 +17,6 @@ test: all
 clean:
 	env GO111MODULE=on go clean -cache
 	rm -fr build/_workspace/pkg/ $(GOBIN)/*
+
+mkdocs-serve: ## Serve generated documentation (during development)
+	build/mkdocs-serve.sh

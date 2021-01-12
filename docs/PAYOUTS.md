@@ -1,3 +1,8 @@
+---
+hide:
+  - navigation # Hide navigation
+---
+
 **First of all make sure your Redis instance and backups are configured properly http://redis.io/topics/persistence.**
 
 Keep in mind that pool maintains all balances in **Shannon**.

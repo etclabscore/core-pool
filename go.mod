@@ -1,11 +1,10 @@
-module github.com/etclabscore/open-etc-pool
+module github.com/etclabscore/core-pool
 
 go 1.15
 
 require (
 	github.com/btcsuite/btcd v0.21.0-beta // indirect
 	github.com/edsrzf/mmap-go v1.0.0
-	github.com/etclabscore/core-pool v0.0.0-00010101000000-000000000000
 	github.com/etclabscore/go-etchash v0.0.0-20201116172336-ee6bd2e29b29
 	github.com/ethereum/go-ethereum v1.9.24
 	github.com/garyburd/redigo v1.6.2 // indirect
@@ -21,5 +20,5 @@ require (
 )
 
 // develop
-// replace github.com/etclabscore/go-etchash => /home/xocel/go/src/github.com/etclabscore/go-etchash
-// replace github.com/etclabscore/core-pool => /home/xocel/go/src/github.com/etclabscore/core-pool
+//replace github.com/etclabscore/go-etchash => /home/xocel/go/src/github.com/etclabscore/go-etchash
+//replace github.com/etclabscore/core-pool => /home/xocel/go/src/github.com/etclabscore/core-pool

@@ -1,6 +1,6 @@
-## core-pool
+# core-pool
 
-### Features
+## Features
 
 * Support for HTTP and Stratum mining
 * Detailed block stats with luck percentage and full reward
@@ -10,7 +10,7 @@
 * New vue based UI
 * Supports Ethereum Classic, Mordor, Ethereum, Ropsten & Ubiq.
 
-### Building on Linux
+## Building on Linux
 
 Dependencies:
 
@@ -31,15 +31,56 @@ Clone & compile:
     cd core-pool
     make
 
-Install redis-server.
+Install redis-server:
 
-### Running Pool
+    sudo apt update
+    sudo apt install redis-server
+
+*The supervised directive is set to no by default. Since you are running Ubuntu, which uses the systemd init system, change this to systemd:*
+
+    sudo nano /etc/redis/redis.conf
+
+```bash
+. . .
+
+# If you run Redis from upstart or systemd, Redis can interact with your
+# supervision tree. Options:
+#   supervised no      - no supervision interaction
+#   supervised upstart - signal upstart by putting Redis into SIGSTOP mode
+#   supervised systemd - signal systemd by writing READY=1 to $NOTIFY_SOCKET
+#   supervised auto    - detect upstart or systemd method based on
+#                        UPSTART_JOB or NOTIFY_SOCKET environment variables
+# Note: these supervision methods only signal "process is ready."
+#       They do not enable continuous liveness pings back to your supervisor.
+supervised systemd
+
+. . .
+```
+
+    sudo systemctl restart redis.service
+
+
+**make sure redis is bound to localhost**
+
+  sudo nano /etc/redis/redis.conf
+
+Locate this line and make sure it is uncommented (remove the # if it exists):
+
+```bash
+bind 127.0.0.1 ::1
+```
+
+Restart redis
+
+    sudo systemctl restart redis
+
+## Running Pool
 
     ./build/bin/core-pool config.json
 
 You can use Ubuntu upstart - check for sample config in <code>upstart.conf</code>.
 
-#### Serving API using nginx
+### Serving API using nginx
 
 Create an upstream for API:
 
